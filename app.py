@@ -89,6 +89,14 @@ class PlantDetectionDashboard:
         refresh_button = tk.Button(zoom_frame, text="Refresh", command=self.refresh_all)
         refresh_button.pack(side="right", padx=5)
 
+        # Machine Learning buttons
+        ml_frame = tk.Frame(self.root)
+        ml_frame.pack(fill="x", padx=10, pady=5)
+        create_dataset_button = tk.Button(ml_frame, text="Create New Dataset", command=self.create_dataset)
+        train_model_button = tk.Button(ml_frame, text="Train Model", command=self.train_model)
+        create_dataset_button.pack(side="left", padx=5)
+        train_model_button.pack(side="left", padx=5)
+
         for i in range(3):
             frame = tk.Frame(self.scrollable_frame, relief=tk.RAISED, borderwidth=2)
             frame.grid(row=0, column=i, padx=10, pady=10, sticky="nsew")
@@ -360,6 +368,25 @@ class PlantDetectionDashboard:
         canvas.draw()
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
         plt.close(fig)
+
+    def create_dataset(self):
+        dataset_directory = filedialog.askdirectory(title="Select Directory to Save New Dataset")
+        if dataset_directory:
+            logging.info(f"Creating new dataset in directory: {dataset_directory}")
+            # Placeholder logic for creating dataset
+            # Actual logic should collect data from analysis and save it as required (e.g., CSV format)
+            with open(os.path.join(dataset_directory, 'dataset.csv'), 'w') as f:
+                f.write("ROI,Parameter,Value\n")
+                f.write("Example ROI,Example Parameter,Example Value\n")
+            logging.info("Dataset created successfully.")
+
+    def train_model(self):
+        training_file = filedialog.askopenfilename(title="Select Training File", filetypes=[("CSV Files", "*.csv"), ("Text Files", "*.txt")])
+        if training_file:
+            logging.info(f"Training model using file: {training_file}")
+            # Placeholder logic for training model
+            # Actual logic should include reading the dataset and training an ML model
+            logging.info("Model training completed successfully.")
 
     def mouse_wheel_zoom(self, event):
         if event.state & 0x0004:  # If Ctrl key is held down
