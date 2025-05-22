@@ -1,123 +1,179 @@
-# ComputerVisionPlantAnalysisDashboard
-A rewrite of a python project I wrote years ago. A dashboard to help you run analysis of plants in your greenhouse. 
+🌿 ComputerVisionPlantAnalysisDashboard
+A comprehensive, real-time dashboard for plant health monitoring and greenhouse environmental tracking, combining computer vision and sensor integration in a unified Python application.
 
-Overview
+🔍 Overview
+ComputerVisionPlantAnalysisDashboard is a dual-purpose GUI application built with Python, offering:
 
-The Plant Detection Dashboard is a GUI application developed using Python to monitor plant health and analyze various plant parameters. It uses multiple cameras to capture plant images and perform several analyses, such as photosynthetic analysis, nutrient deficiency detection, plant morphology analysis, and more. The application uses the following main libraries:
+Plant Analysis System: Computer vision-based plant health diagnostics and morphological analysis
 
-OpenCV: For accessing camera feeds.
+Environmental Monitoring System: Real-time visualization of environmental sensor data
 
-Tkinter: For building the graphical user interface (GUI).
+Designed for greenhouse settings, this system empowers agronomists, researchers, and horticultural engineers to observe, analyze, and respond proactively to plant and environmental conditions.
 
-PlantCV: For image processing and plant analysis.
+📦 Key Technologies
+Component	Purpose
+OpenCV	Real-time camera input & image processing
+PlantCV	Advanced plant morphological and physiological analysis
+Tkinter	GUI development
+PySerial	Serial communication with sensors
+Matplotlib	Graphing and historical data visualization
+Pandas	Data manipulation and tabular display
+Pillow	Image display and enhancements
 
-Pandas: For handling and analyzing tabular data.
+🚀 Features
+🌱 Plant Detection Tab
+Camera Management
 
-Matplotlib: For graphing analysis results.
+Select up to three cameras
 
-Pillow: For image display.
+Adjustable streaming quality and FPS
 
-Features
+Independent start/stop controls per feed
 
-Camera Selection: The user can select up to three cameras to be used for analysis.
+Analysis Options
 
-Analysis Options: Users can choose different types of plant analyses, including:
+ROI (Region of Interest) detection
 
-Get ROI Info
+Photosynthetic analysis (Fv/Fm, Fq'/Fm', NPQ)
 
-Photosynthetic Analysis
+Health scoring
 
-Health Status Analysis
+Growth rate measurement
 
-Growth Rate Analysis
+Nutrient deficiency estimation
 
-Nutrient Deficiency Detection
+ML-based detection framework
 
-Machine Learning Detection
+Full morphology scan: stems, leaves, tip/branch points, curvature, etc.
 
-Plant Morphology Analysis
+User Interface
 
-Refresh Button: Analysis is only performed when the user manually clicks the refresh button, allowing the user to control when updates occur.
+Zoom, pan, and scroll capabilities
 
-Zoom: The user can zoom in and out on the scrollable frame to view details more clearly.
+Real-time data tables and graphs
 
-Scrollable Interface: The application has a scrollable frame that can accommodate different analyses for multiple grids.
+On-demand frame analysis for performance optimization
 
-Logging: Logging is configured to provide detailed information on the progress and any issues encountered.
+🌡️ Environmental Monitoring Tab
+Serial Integration
 
-Installation
+Auto-detect available COM ports
 
-To use this application, you will need to install the following dependencies:
+Configurable baud rate
 
+Safe connect/disconnect interface
+
+Real-Time Visualization
+
+Live circular gauges for:
+
+🌡️ Temperature (°C)
+
+💧 Humidity (%)
+
+🫁 CO2 (ppm)
+
+💡 Light (lux)
+
+🌱 Soil Moisture (%)
+
+Timestamped historical graphs
+
+Data Management
+
+Adjustable history window
+
+Clear/reset functionality
+
+Thread-safe continuous monitoring
+
+🧪 Installation
+Requirements
 Python 3.6+
 
-Required libraries:
+Install dependencies:
 
-pip install opencv-python plantcv Pillow matplotlib pandas
+bash
+Copy
+Edit
+pip install opencv-python pillow matplotlib pandas pyserial plantcv
+🖥️ Usage Guide
+Launching the App
+bash
+Copy
+Edit
+python app.py
+Plant Detection Tab
+Select available cameras
 
-How to Use
+Adjust quality and FPS
 
-Run the Application: Start the application by running the script using the command:
+Click Start Stream
 
-python plant_detection_dashboard.py
+Click Capture Frame for analysis
 
-Select Cameras: For each grid, select an available camera using the drop-down menu.
+Choose an analysis type and click Analyze Current Frame
 
-Select Analysis: Choose the type of plant analysis you want to perform from the analysis drop-down menu.
+Review results in real-time tables and graphs
 
-Refresh Analysis: Click the "Refresh" button to update the analysis for each grid.
+Environmental Monitoring Tab
+Select a COM port and baud rate
 
-Zoom In/Out: Use the zoom buttons to adjust the view within the scrollable frame.
+Click Connect
 
-Plant Analyses
+Monitor gauges and graphs
 
-Get ROI Info: Provides information on regions of interest (ROIs) detected in the plant image.
+Click Clear Data to reset tracking
 
-Photosynthetic Analysis: Displays photosynthetic metrics like Fv/Fm, Fq'/Fm', and NPQ.
+📊 Plant Analysis Details
+Analysis Type	Description
+ROI Info	Detects plant outlines and regions of interest
+Photosynthetic Metrics	Fv/Fm, Fq'/Fm', NPQ values
+Health Analysis	Classifies plant health condition
+Growth Rate	Detects size and growth over time
+Nutrient Deficiency	Identifies visual symptoms
+Machine Learning	Integration-ready framework
+Morphology	Tip/stem/branch/leaf identification and shape analysis
 
-Health Status Analysis: Analyzes the health of the plant and displays a status (e.g., Healthy).
+🌎 Sensor Data Format (Expected via Serial)
+Each message should include:
 
-Growth Rate Analysis: Displays the growth rate of the plant based on detected metrics.
+json
+Copy
+Edit
+{
+  "temperature": 24.5,
+  "humidity": 55,
+  "co2": 400,
+  "light": 750,
+  "soil_moisture": 38
+}
+⚙️ Performance Tips
+For best results:
 
-Nutrient Deficiency Detection: Attempts to identify any nutrient deficiencies in the plant.
+Use 1–5 FPS for smoother system performance
 
-Machine Learning Detection: Placeholder for machine learning analysis on plant data.
+Adjust resolution/quality for lower CPU usage
 
-Plant Morphology Analysis: Analyzes the plant's morphological features, such as branch points, tip points, stem count, leaf count, etc. Multiple attempts are made to get an accurate skeleton if initial analysis fails.
+Capturing frames on-demand is recommended for analysis
 
-Error Handling
+Environmental monitoring runs in the background regardless of tab
 
-If an error occurs during the plant morphology analysis, the application will make up to three attempts to obtain the skeleton and perform analysis.
+📈 Future Enhancements
+✅ Machine Learning: Integrate CNNs for real-time classification
 
-Errors encountered during analysis are logged to help troubleshoot issues.
+📤 Data Export: Export historical and analysis results as CSV/Excel
 
-Controls and Navigation
+🔐 User Authentication: Secure login and role-based access
 
-Camera Dropdown: Select which camera to use for each grid.
+🌐 Web Dashboard: Remote access via Flask or Django API
 
-Analysis Dropdown: Select the type of analysis to perform.
+🤖 Automated Greenhouse Control: Trigger fans, lights, watering systems
 
-Refresh Button: Click to manually refresh and update the analysis for all grids.
+📄 License
+MIT License – open for personal, educational, and commercial use. See LICENSE for more details.
 
-Zoom Buttons: Click "Zoom In" or "Zoom Out" to adjust the view of the application.
-
-Mouse Wheel Zoom: Hold the Ctrl key and use the mouse wheel to zoom in or out within the scrollable frame.
-
-Notes
-
-Once an analysis completes successfully, it will not update until the "Refresh" button is clicked.
-
-The application is configured to use up to three camera feeds, each with a dedicated analysis grid.
-
-Future Enhancements
-
-Machine Learning Integration: Implement actual machine learning models for plant health detection and analysis.
-
-Data Export: Add functionality to export analysis data to CSV or other formats.
-
-User Authentication: Introduce user authentication for controlled access.
-
-License
-
-This project is licensed under the MIT License.
+👨‍💻 Author
+Adam Dabdoub – CTI Developer
+Specializing in full-stack development, plant science, and greenhouse automation.
 
